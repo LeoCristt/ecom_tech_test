@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { X } from 'lucide-react';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface Product {
     id: number;
@@ -17,7 +17,11 @@ interface ProductModalProps {
 }
 
 export default function ProductModal({ product, onClose }: ProductModalProps) {
+    const [isVisible, setIsVisible] = useState(false);
+
     useEffect(() => {
+        setTimeout(() => setIsVisible(true), 10);
+
         const handleEsc = (e: KeyboardEvent) => {
             if (e.key === 'Escape') {
                 onClose();
@@ -43,15 +47,14 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
     const handleBuy = () => {
         alert(`Товар "${product.title} добавлен в корзину"`);
         onClose();
-
     };
 
 
     return (
         <div
             onClick={handleBack}
-            className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50">
-            <div className="bg-zinc-900 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-auto border border-zinc-800 relative">
+            className={`fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50 transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+            <div className={`bg-zinc-900 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-auto border border-zinc-800 relative transition-all duration-300 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
                 <button
                     onClick={onClose}
                     className="absolute top-4 right-4 text-zinc-400 hover:text-zinc-200 cursor-pointer"
@@ -62,8 +65,8 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
                 <div className="grid md:grid-cols-2 gap-8 p-8">
                     <div className="relative h-96 bg-zinc-800 rounded-lg">
                         <Image
-                            src="/img/iPhone14Pro.png"
-                            alt=""
+                            src={product.image}
+                            alt={product.title}
                             width={900}
                             height={900}
                             className="w-full h-full object-contain p-4"
@@ -89,7 +92,7 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
 
                             <button
                                 onClick={handleBuy}
-                                className="w-full bg-violet-500 text-black font-semibold text-lg py-4 rounded-lg">
+                                className="w-full bg-violet-500 hover:bg-violet-600 text-white font-semibold text-lg py-4 rounded-lg transition-colors duration-200">
                                 Купить
                             </button>
                         </div>

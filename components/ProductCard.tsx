@@ -19,14 +19,14 @@ export default function ProductCard({ product, onClick }: ProductCardProps) {
     return (
         <div
             onClick={onClick}
-            className="w-72 bg-zinc-900 rounded-lg overflow-hidden border border-zinc-800 cursor-pointer">
-            <div className="realtive h-52 bg-zinc-800">
+            className="h-fit bg-zinc-900 rounded-lg overflow-hidden border border-zinc-800 cursor-pointer hover:border-violet-500 transition-all duration-300">
+            <div className="relative h-52 bg-zinc-800 overflow-hidden flex items-center justify-center">
                 <Image
                     src={product.image}
                     alt={product.title}
                     width={900}
                     height={900}
-                    className="object-contain p-6"
+                    className="object-contain w-full h-full p-4"
                 />
             </div>
             <div className="p-5">
