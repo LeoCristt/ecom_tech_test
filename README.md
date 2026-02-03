@@ -11,6 +11,8 @@ npm run dev
 
 Ссылка [http://localhost:3000](http://localhost:3000)
 
+API [http://localhost:3000/api/products](http://localhost:3000/api/products)
+
 ## Технологии
 
 - Next.js 
